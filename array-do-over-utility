@@ -1,0 +1,23 @@
+/*
+Project:    
+Programmer: Nicole Fox (foxn)
+Purpose:    Sample SAS program dynamically processing a function against every 
+            element in an array using a DO-OVER statement.  
+NOTE:       This program is set to proper case all the string variables in an 
+            existing SAS dataset by default.   
+NOTE:       This program was tested as a user-defined snippet in SAS Studio 3.4                        
+History:    2017-01-09 ~ foxn ~ initial version   
+*/
+*------------------------------------------------------------------------------;
+%let dsetin=YOUR.INPUT.DATASET;
+%let dsetout=YOUR.OUTPUT.DATASET;
+%let vartype=_character_; 
+%let function=propcase; 
+*------------------------------------------------------------------------------;
+data &dsetout.; 
+     set &dsetin.;  
+     array doOver &vartype.; 
+     do over doOver; 
+        doOver=&function.(doOver);
+     end;   
+run;
