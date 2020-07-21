@@ -1,0 +1,17 @@
+/*
+Project:    
+Programmer: Nicole Fox (foxn)
+Purpose:    Assign XLSX Library and lists tables available in newly created library                     
+History:    2020-07-21 ~ foxn ~ initial version   
+*/
+*------------------------------------------------------------------------------;
+%let xlsxpath=PATH_TO_YOUR_EXCEL_FILE;
+%let xlsxin=YOUR_EXCEL_FILE.XLSX;
+%let lib=LIBREF;
+*------------------------------------------------------------------------------;
+libname &lib xlsx "&xlsxpath.&xlsxin";
+proc sql;
+	describe table dictionary.members;
+	title "SAS Files in the &lib Library";
+	select memname, memtype from dictionary.members where libname="&lib";
+quit; 	
