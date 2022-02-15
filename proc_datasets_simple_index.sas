@@ -1,0 +1,11 @@
+*Adds a simple index to an existing SAS dataset;
+*Enter Parameters;
+%let lib=LIB; 
+%let dset=DSET;
+%let var=VAR; 
+*Execute Code; 
+proc datasets nolist nodetails library=&lib.; 
+     modify &dset.;  
+     index create &var.;
+run;     
+quit;
